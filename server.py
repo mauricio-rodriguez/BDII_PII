@@ -73,7 +73,7 @@ app = Flask(__name__)
 @app.route("/search", methods = ['GET'])
 def search():
     query = request.args.get("searchT")
-    k = 10
+    k = request.args.get("k_closest")
     result = {}
     pruebas = json.dumps(test)
     

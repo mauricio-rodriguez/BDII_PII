@@ -28,6 +28,7 @@
 	<link rel="stylesheet" href="../static/css/color.css">
 	<link rel="stylesheet" href="../static/css/responsive.css">
 	<link rel="stylesheet" href="../static/css/searchbox.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<script src="../static/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
 </head>
 <body>
@@ -102,10 +103,11 @@
 			<!--************************************
 					Top Rated Player Start
 			*************************************-->
-			<div>
-				<form action = "/search" method = "GET">
-					<input type="text" name="searchT" placeholder="Busque sobre las eliminatorias:">
-					<button type = "submit">search</button>
+			<div class = "container">
+				<form action = "/search" class = "example" method = "GET">
+					<input type="text" name="searchT" placeholder="Contenido">
+					<input type="number" min = "1" max = "100" name="k_closest" placeholder="Cantidad de tweets">
+					<button type="submit"><i class="fa fa-search"></i></button>
 				</form> 
 			</div>
 			<section class="tg-main-section tg-haslayout">

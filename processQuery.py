@@ -3,6 +3,7 @@ from nltk.corpus import stopwords
 from nltk.stem import SnowballStemmer
 import json
 import numpy as np
+import math
 
 from buildInvertedIndex import stemmer
 
@@ -43,11 +44,19 @@ def getNorm(tfidf_Input, tfidf_Index):
     index = {}
     input = 0
 
-    for token in tfidf:
-        input += tfidf[token]**
+    for token in tfidf_Input:
+        input += tfidf_Input[token]** 2
+    
+    input = input ** 0.5
 
-    for tweetID in tfidf:
-        index[tweetID] = np.linalg.norm(tfidf[tweetID])
+    for tweetID in tfidf_Index:
+        temp = 0
+        for token in tfidf_Index[tweetID]:
+            temp += tfidf_Index[tweetID][token] ** 2
+        
+        index[temp] = temp ** 0.5
+    
+    return input, index
 
 def tokenizeQuery(query):
     query = query.lower()
@@ -59,4 +68,41 @@ def tokenizeQuery(query):
         steemed_tokens.append(stemmer.stem(token))
 
     return steemed_tokens
+
+
+def queryResult(query, invIndex, N_Tweets, K):
+    query = tokenizeQuery(query)
+    tfidf_Input, tfidf_Index = getTfIdf(query, invIndex, N_Tweets)
+    scoreCoseno = similitudCoseno(tfidf_Input, tfidf_Index)
+    tweets = scoreCoseno.items()
+
+    if len(scoreCoseno) > K:
+        k_tweets = list(tweets)[:K]
+    else:
+        k_tweets = list(tweets)[:]
+    
+    return k_tweets
+
+def similitudCoseno(tfidf_Input, tfidf_Index):
+    score = {}
+
+    print(tfidf_Input, tfidf_Index)
+    norm_Input, norm_Index = getNorm(tfidf_Input, tfidf_Index)
+
+    print(getNorm(tfidf_Input, tfidf_Index))
+
+    for tweetID in tfidf_Index:
+        dot = 0
+        # NormaT = norm_Index[tweetID] * norm_Input
+        # for token in tfidf_Index[tweetID]:
+        #     dot += tfidf_Input[token] * tfidf_Index[tweetID][token]
+        
+        # score[tweetID] = dot / NormaT
+    
+    score = {k: v for k, v in sorted(score.items(), key=lambda item: item[1])}
+
+    return score
+
+
+
 

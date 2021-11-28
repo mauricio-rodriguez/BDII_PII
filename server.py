@@ -1,3 +1,12 @@
+from flask import Flask,render_template, request, Response, redirect,url_for
+import json
+from buildInvertedIndex import getIndex
+from index import buildIndex
+
+indexPath = '/data/invertedIndex.json'
+dataPath = '/data'
+
+
 init = [
   {
     "b'Manchester City vs. PSG: resultado, resumen y goles del partidazo por la fecha 5 de Champions League - RPP Noticias: * Manchester City vs. PSG: resultado, resumen y goles del partidazo\\xe2\\x80\\xa6 https://t.co/jknNl3FuQT #Videosm\\xc3\\xa1sVistos #ChampionsLeague #LionelMessi #ManchesterCity #PSG https://t.co/dj5Wl2J0po'",
@@ -34,10 +43,12 @@ init = [
 
   }]
 
+
+
 test = []
 app = Flask(__name__)
 
-[invertedIndex, totalTweets, allTweets] = buildIndex(indexPath, dataPath)
+[invertedIndex, totalTweets, allTweets] = getIndex(indexPath, dataPath)
 
 @app.route("/search", methods = ['GET'])
 def search():

@@ -28,7 +28,6 @@
 	<link rel="stylesheet" href="../static/css/color.css">
 	<link rel="stylesheet" href="../static/css/responsive.css">
 	<link rel="stylesheet" href="../static/css/searchbox.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<script src="../static/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
 </head>
 <body>
@@ -103,11 +102,11 @@
 			<!--************************************
 					Top Rated Player Start
 			*************************************-->
-			<div class = "container">
-				<form action = "/search" class = "example" method = "GET">
-					<input type="text" name="searchT" placeholder="Contenido">
-					<input type="number" min = "1" max = "100" name="k_closest" placeholder="Cantidad de tweets">
-					<button type="submit"><i class="fa fa-search"></i></button>
+			<div>
+				<form action = "/search" method = "GET">
+					<input class="form-control" type="text" name="searchT" placeholder="Buscar:" autofocus>
+					<input class="form-control" type="text" name="limit" placeholder="N° Tweets:" autofocus>
+					<button type = "submit">search</button>
 				</form> 
 			</div>
 			<section class="tg-main-section tg-haslayout">
@@ -119,25 +118,17 @@
 						<div class="row">
 							<div class="tg-topratedplayer tg-haslayout">
 								<div class="row">
-									<div class="col-md-7 col-sm-12 col-xs-12">
+									<div class="col-md-20 col-sm-16 col-xs-12">
 										<div id="tg-playerscrollbar" class="tg-players tg-playerscrollbar">
 											{% for tweet in tweets %}
 											<div class="tg-player">
-												<div class="col-sm-6 col-xs-6 pull-right">
+												<div class="col-sm-12 col-xs-12 pull-right">
 													<div class="tg-playcontent">
-														<a class="tg-theme-tag" href="#">{{tweet['id']}}</a>
-														<h3><a href="#">{{tweet['user_name']}}</a></h3>
+														<h3><a href="#">{{tweet}}</a></h3>
 														<div class="tg-description">
-															<p>{{tweet['text']}}</p>
+															<p>{{tweets[tweet]}}</p>
 														</div>
 													</div>
-												</div>
-												<div class="col-sm-6 col-xs-6">
-													<figure>
-														<a href="#">
-															<img src="{{tweet['profile_image_url']}}" alt="image description">
-														</a>
-													</figure>
 												</div>
 											</div>
 											{% endfor %}

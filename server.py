@@ -1,10 +1,10 @@
 from flask import Flask,render_template, request, Response, redirect,url_for
 import json
 from buildInvertedIndex import getIndex
-from index import buildIndex
+from processQuery import queryResult
 
-indexPath = '/data/invertedIndex.json'
-dataPath = '/data'
+indexPath = 'data/invertedIndex.json'
+dataPath = 'tweets/'
 
 
 init = [

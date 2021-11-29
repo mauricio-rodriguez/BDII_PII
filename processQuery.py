@@ -89,15 +89,13 @@ def similitudCoseno(tfidf_Input, tfidf_Index):
     print(tfidf_Input, tfidf_Index)
     norm_Input, norm_Index = getNorm(tfidf_Input, tfidf_Index)
 
-    print(getNorm(tfidf_Input, tfidf_Index))
-
     for tweetID in tfidf_Index:
         dot = 0
-        # NormaT = norm_Index[tweetID] * norm_Input
-        # for token in tfidf_Index[tweetID]:
-        #     dot += tfidf_Input[token] * tfidf_Index[tweetID][token]
+        NormaT = norm_Index[tweetID] * norm_Input
+        for token in tfidf_Index[tweetID]:
+            dot += tfidf_Input[token] * tfidf_Index[tweetID][token]
         
-        # score[tweetID] = dot / NormaT
+        score[tweetID] = dot / NormaT
     
     score = {k: v for k, v in sorted(score.items(), key=lambda item: item[1])}
 

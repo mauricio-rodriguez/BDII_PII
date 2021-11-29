@@ -112,7 +112,7 @@ def tweetsInfo(path):
     tweets = {}
 
     data = os.listdir(path)
-    data = open(path + data[3],'r')
+    data = open(path + data[0],'r')
     info = json.load(data)
 
     for tweet in info:

@@ -41,6 +41,7 @@ def getTfIdf(query, invIndex, N_Tweets):
     return input, index
 
 def getNorm(tfidf_Input, tfidf_Index):
+
     index = {}
     input = 0
 
@@ -54,7 +55,7 @@ def getNorm(tfidf_Input, tfidf_Index):
         for token in tfidf_Index[tweetID]:
             temp += tfidf_Index[tweetID][token] ** 2
         
-        index[temp] = temp ** 0.5
+        index[tweetID] = temp ** 0.5
     
     return input, index
 
@@ -85,9 +86,8 @@ def queryResult(query, invIndex, N_Tweets, K):
 
 def similitudCoseno(tfidf_Input, tfidf_Index):
     score = {}
-
-    print(tfidf_Input, tfidf_Index)
     norm_Input, norm_Index = getNorm(tfidf_Input, tfidf_Index)
+
 
     for tweetID in tfidf_Index:
         dot = 0

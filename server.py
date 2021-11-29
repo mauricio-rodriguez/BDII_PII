@@ -57,7 +57,7 @@ def search():
     retrievalResult = {}
     result = []
 
-    tweets = queryResult(textInput, invertedIndex, totalTweets, int(k),)
+    tweets = queryResult(textInput, invertedIndex, totalTweets, int(k))
     for tweet in tweets:
         retrievalResult[tweet[0]] = allTweets[int(tweet[0])]
         temp = retrievalResult[tweet[0]]
